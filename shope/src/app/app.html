@@ -1,15 +1,35 @@
-<h1>Student List</h1>
+<div class="page">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
 
-<div class="card">
-  <h2>Student 1</h2>
-  <p>Name: {{ s1.name }}</p>
-  <p>Age: {{ s1.age }}</p>
-</div>
+  <header class="hero">
+    <span class="badge">Angular + TypeScript</span>
+    <h1>Student <span class="accent">Dashboard</span></h1>
+    <p class="subtitle">Simple and clean student profiles</p>
+  </header>
 
-<div class="card">
-  <h2>Student 2</h2>
-  <p>Name: {{ s2.name }}</p>
-  <p>Age: {{ s2.age }}</p>
+  <section class="cards">
+    <article class="card" style="--delay: 0.1s">
+      <div class="avatar">{{ s1.name[0] }}</div>
+      <h2>{{ s1.name }}</h2>
+      <span class="tag">Student 1</span>
+      <div class="info">
+        <div><small>Name</small><strong>{{ s1.name }}</strong></div>
+        <div><small>Age</small><strong>{{ s1.age }}</strong></div>
+      </div>
+    </article>
+
+    <article class="card" style="--delay: 0.3s">
+      <div class="avatar alt">{{ s2.name[0] }}</div>
+      <h2>{{ s2.name }}</h2>
+      <span class="tag">Student 2</span>
+      <div class="info">
+        <div><small>Name</small><strong>{{ s2.name }}</strong></div>
+        <div><small>Age</small><strong>{{ s2.age }}</strong></div>
+      </div>
+    </article>
+  </section>
 </div>
 
 <router-outlet />
