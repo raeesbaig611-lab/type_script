@@ -1,0 +1,33 @@
+<!-- Example 1 — @if -->
+<h1>Result</h1>
+
+@if (isPass) {
+  <h2>Pass</h2>
+} @else {
+  <h2>Fail</h2>
+}
+
+<!-- Example 2 — @for -->
+<h1>Student List</h1>
+
+@for (student of students; track student) {
+  <h3>{{ student }}</h3>
+}
+
+<!-- Example 3 — @switch -->
+<h1>Student Grade</h1>
+
+@switch (grade) {
+  @case ('A') {
+    <h2>Excellent!</h2>
+  }
+  @case ('B') {
+    <h2>Good!</h2>
+  }
+  @case ('C') {
+    <h2>Need Improvement</h2>
+  }
+  @default {
+    <h2>Invalid Grade</h2>
+  }
+}
