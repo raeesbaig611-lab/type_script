@@ -1,0 +1,13 @@
+<!-- Tareeqa 1: ngClass -->
+<h1 [ngClass]="isPass ? 'success' : 'fail'">
+  Student Result
+</h1>
+
+<!-- Tareeqa 2: @if / @else -->
+@if (isPass) {
+  <h1 class="success">Student Pass</h1>
+} @else {
+  <h1 class="fail">Student Fail</h1>
+}
+
+<button (click)="toggleResult()">Change Result</button>
