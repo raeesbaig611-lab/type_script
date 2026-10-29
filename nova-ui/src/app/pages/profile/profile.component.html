@@ -1,0 +1,28 @@
+<section class="container page">
+  <h1 class="section-title">My <span class="gradient-text">Account</span></h1>
+  <p class="section-sub">Manage your profile and view your orders.</p>
+  <div class="layout">
+    <aside class="card me">
+      <div class="big">{{ name[0] || 'U' }}</div>
+      <h3>{{ name }}</h3><small>{{ email }}</small>
+      <div class="stats"><div><b>{{ orders.length }}</b><span>Orders</span></div><div><b>3</b><span>Wishlist</span></div></div>
+      <button class="btn btn-ghost btn-block" (click)="logout()">Logout</button>
+    </aside>
+    <div class="col">
+      <form class="card box" (ngSubmit)="save()">
+        <h3>Profile details</h3>
+        @if (saved()) { <div class="alert-ok">✅ Profile updated.</div> }
+        <div class="row2"><label class="field">Full name<input name="n" [(ngModel)]="name" /></label><label class="field">Email<input name="e" type="email" [(ngModel)]="email" /></label></div>
+        <div class="row2"><label class="field">Phone<input name="p" [(ngModel)]="phone" /></label><label class="field">City<input name="c" [(ngModel)]="city" /></label></div>
+        <div><button class="btn btn-primary" type="submit">Save changes</button></div>
+      </form>
+      <div class="card box">
+        <h3>Order history</h3>
+        @for (o of orders; track o.id) {
+          <div class="ord"><div><b>{{ o.id }}</b><small>{{ o.date }} · {{ o.items }}</small></div><span class="badge" [class]="o.status.toLowerCase()">{{ o.status }}</span><b>{{ o.total | currency }}</b></div>
+        }
+        <a routerLink="/products" class="btn btn-ghost">Shop more →</a>
+      </div>
+    </div>
+  </div>
+</section>

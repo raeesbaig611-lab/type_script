@@ -52,6 +52,7 @@
         <div class="r"><span>Subtotal</span><b>{{ cart.subtotal() | currency }}</b></div>
         <div class="r"><span>Shipping</span><b>{{ cart.shipping() ? (cart.shipping() | currency) : 'Free' }}</b></div>
         <div class="r"><span>Tax</span><b>{{ cart.tax() | currency }}</b></div>
+        @if (cart.couponApplied()) { <div class="r"><span>Discount (NOVA10)</span><b>−{{ cart.discount() | currency }}</b></div> }
         <div class="r total"><span>Total</span><b>{{ cart.total() | currency }}</b></div>
       </aside>
     </div>

@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { Router, Routes } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
+const userGuard = () => (inject(AuthService).user() ? true : inject(Router).createUrlTree(['/login']));
 const adminGuard = () => (inject(AuthService).isAdmin() ? true : inject(Router).createUrlTree(['/login']));
 
 export const routes: Routes = [
@@ -12,6 +13,7 @@ export const routes: Routes = [
   { path: 'checkout', title: 'Nova — Checkout', loadComponent: () => import('./pages/checkout/checkout.component').then(m => m.CheckoutComponent) },
   { path: 'login', title: 'Nova — Login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) },
   { path: 'register', title: 'Nova — Sign up', loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent) },
+  { path: 'profile', title: 'Nova — My Account', canActivate: [userGuard], loadComponent: () => import('./pages/profile/profile.component').then(m => m.ProfileComponent) },
   { path: 'dashboard', title: 'Nova — Dashboard', loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent) },
   { path: 'about', title: 'Nova — About', loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent) },
   { path: 'contact', title: 'Nova — Contact', loadComponent: () => import('./pages/contact/contact.component').then(m => m.ContactComponent) },

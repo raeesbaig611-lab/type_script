@@ -1,0 +1,8 @@
+.layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; align-items: start; }
+.me { padding: 2rem; text-align: center; display: grid; gap: .5rem; justify-items: center; } .me small { color: var(--muted); }
+.big { width: 96px; height: 96px; border-radius: 50%; background: var(--grad); color: #fff; font-size: 2.6rem; font-weight: 800; display: grid; place-items: center; box-shadow: 0 10px 30px rgba(108, 92, 231, .4); }
+.stats { display: flex; gap: 2rem; margin: 1rem 0; } .stats div { display: grid; } .stats b { font-size: 1.5rem; } .stats span { color: var(--muted); font-size: .8rem; }
+.col { display: grid; gap: 1.5rem; } .box { padding: 1.8rem; display: grid; gap: 1rem; }
+.ord { display: flex; align-items: center; gap: 1rem; padding: .8rem 0; border-bottom: 1px solid var(--border); } .ord div { flex: 1; display: grid; } .ord small { color: var(--muted); }
+.badge { padding: .2rem .8rem; border-radius: 999px; font-size: .78rem; font-weight: 600; } .delivered { background: #00b89420; color: #00b894; } .shipped { background: #0984e320; color: #0984e3; }
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .row2 { grid-template-columns: 1fr; } }

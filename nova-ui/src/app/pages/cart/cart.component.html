@@ -22,8 +22,8 @@
         <div class="r"><span>Subtotal</span><b>{{ cart.subtotal() | currency }}</b></div>
         <div class="r"><span>Shipping</span><b>{{ cart.shipping() ? (cart.shipping() | currency) : 'Free' }}</b></div>
         <div class="r"><span>Tax (8%)</span><b>{{ cart.tax() | currency }}</b></div>
-        @if (applied()) { <div class="r disc"><span>Discount (NOVA10)</span><b>−{{ discount() | currency }}</b></div> }
-        <div class="r total"><span>Total</span><b>{{ total() | currency }}</b></div>
+        @if (cart.couponApplied()) { <div class="r disc"><span>Discount (NOVA10)</span><b>−{{ cart.discount() | currency }}</b></div> }
+        <div class="r total"><span>Total</span><b>{{ cart.total() | currency }}</b></div>
         <div class="cp"><input class="input" placeholder="Coupon code" [value]="coupon()" (input)="coupon.set($any($event.target).value)" /><button class="btn btn-ghost" (click)="apply()">Apply</button></div>
         <small class="hint">Try code <b>NOVA10</b></small>
         <a routerLink="/checkout" class="btn btn-primary btn-block">Proceed to checkout →</a>
