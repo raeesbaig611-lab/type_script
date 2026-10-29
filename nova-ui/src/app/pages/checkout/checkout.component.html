@@ -1,0 +1,59 @@
+<section class="container page">
+  @if (done()) {
+    <div class="card success">
+      <div class="tick">✓</div>
+      <h1>Order placed!</h1>
+      <p>Thank you, <b>{{ form.controls.name.value || 'customer' }}</b>. Your order <b>{{ orderNo }}</b> of <b>{{ paidTotal | currency }}</b> is confirmed.</p>
+      <div class="steps"><span class="on">📦 Packed</span><span>🚚 Shipped</span><span>🏠 Delivered</span></div>
+      <div class="acts"><a routerLink="/products" class="btn btn-primary">Continue shopping</a><a routerLink="/" class="btn btn-ghost">Back home</a></div>
+    </div>
+  } @else if (!cart.items().length) {
+    <div class="card success"><div class="tick">🛒</div><h2>Your cart is empty</h2><a routerLink="/products" class="btn btn-primary">Shop products</a></div>
+  } @else {
+    <h1 class="section-title"><span class="gradient-text">Checkout</span></h1>
+    <p class="section-sub">Fill in your details to complete the order.</p>
+    <div class="layout">
+      <form class="card form" [formGroup]="form" (ngSubmit)="place()" novalidate>
+        <h3>1. Shipping details</h3>
+        <div class="row2">
+          <label class="field">Full name<input formControlName="name" placeholder="John Doe" [class.err]="bad('name')" />@if (bad('name')) { <em>Enter your full name.</em> }</label>
+          <label class="field">Email<input type="email" formControlName="email" placeholder="you@example.com" [class.err]="bad('email')" />@if (bad('email')) { <em>Enter a valid email.</em> }</label>
+        </div>
+        <div class="row2">
+          <label class="field">Phone<input formControlName="phone" placeholder="+92 300 1234567" [class.err]="bad('phone')" />@if (bad('phone')) { <em>Enter a valid phone number.</em> }</label>
+          <label class="field">City<input formControlName="city" placeholder="Lahore" [class.err]="bad('city')" />@if (bad('city')) { <em>City is required.</em> }</label>
+        </div>
+        <div class="row2">
+          <label class="field">Address<input formControlName="address" placeholder="House 1, Street 2" [class.err]="bad('address')" />@if (bad('address')) { <em>Address is required.</em> }</label>
+          <label class="field">ZIP code<input formControlName="zip" placeholder="54000" [class.err]="bad('zip')" />@if (bad('zip')) { <em>Enter a 4–6 digit ZIP.</em> }</label>
+        </div>
+
+        <h3>2. Payment method</h3>
+        <div class="pay">
+          <label [class.sel]="card"><input type="radio" value="card" formControlName="payment" /> 💳 Credit / Debit card</label>
+          <label [class.sel]="!card"><input type="radio" value="cod" formControlName="payment" /> 💵 Cash on delivery</label>
+        </div>
+        @if (card) {
+          <label class="field">Name on card<input formControlName="cardName" placeholder="John Doe" [class.err]="cardBad('cardName')" />@if (cardBad('cardName')) { <em>Required.</em> }</label>
+          <label class="field">Card number<input formControlName="cardNumber" placeholder="4242 4242 4242 4242" [class.err]="cardBad('cardNumber')" />@if (cardBad('cardNumber')) { <em>Enter 13–19 digits.</em> }</label>
+          <div class="row2">
+            <label class="field">Expiry (MM/YY)<input formControlName="expiry" placeholder="08/28" [class.err]="cardBad('expiry')" />@if (cardBad('expiry')) { <em>Use MM/YY.</em> }</label>
+            <label class="field">CVV<input formControlName="cvv" placeholder="123" [class.err]="cardBad('cvv')" />@if (cardBad('cvv')) { <em>3–4 digits.</em> }</label>
+          </div>
+        }
+        <button class="btn btn-primary btn-block" type="submit">Place order · {{ cart.total() | currency }}</button>
+      </form>
+
+      <aside class="card sum">
+        <h3>Order summary</h3>
+        @for (i of cart.items(); track i.product.id) {
+          <div class="it"><span class="mini" [style.background]="i.product.color + '44'">{{ i.product.emoji }}</span><div><b>{{ i.product.name }}</b><small>Qty {{ i.qty }}</small></div><b>{{ i.product.price * i.qty | currency }}</b></div>
+        }
+        <div class="r"><span>Subtotal</span><b>{{ cart.subtotal() | currency }}</b></div>
+        <div class="r"><span>Shipping</span><b>{{ cart.shipping() ? (cart.shipping() | currency) : 'Free' }}</b></div>
+        <div class="r"><span>Tax</span><b>{{ cart.tax() | currency }}</b></div>
+        <div class="r total"><span>Total</span><b>{{ cart.total() | currency }}</b></div>
+      </aside>
+    </div>
+  }
+</section>

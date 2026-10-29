@@ -1,0 +1,19 @@
+.auth { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 110px); }
+.art { position: relative; overflow: hidden; background: var(--grad); color: #fff; display: grid; align-content: center; justify-items: start; gap: 1rem; padding: 4rem; }
+.art h2 { font-size: 2.8rem; line-height: 1.1; } .art p { opacity: .9; max-width: 380px; font-size: 1.1rem; }
+.emoji { font-size: 9rem; animation: float 5s ease-in-out infinite; }
+.blob { position: absolute; width: 380px; height: 380px; border-radius: 50%; background: rgba(255, 255, 255, .15); top: -120px; right: -100px; }
+.panel { display: grid; place-items: center; padding: 2rem 1rem; }
+.box { width: min(480px, 100%); padding: 2.2rem; display: grid; gap: 1.1rem; }
+.box h1 { font-size: 2rem; } .sub { color: var(--muted); margin-top: -.6rem; }
+.pw { position: relative; display: block; } .pw input { padding-right: 3rem; }
+.pw button { position: absolute; right: .6rem; top: 50%; transform: translateY(-50%); background: none; border: 0; font-size: 1.1rem; }
+.meter { display: flex; gap: .3rem; } .meter i { flex: 1; height: 5px; border-radius: 3px; background: var(--border); } .meter i.on { background: var(--grad); }
+.chk { display: flex; align-items: center; gap: .5rem; font-size: .9rem; color: var(--muted); } .chk input { accent-color: var(--primary); }
+.between { display: flex; justify-content: space-between; font-size: .9rem; } .between a { color: var(--primary); font-weight: 600; }
+.or { text-align: center; color: var(--muted); font-size: .85rem; position: relative; }
+.or::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--border); } .or span { position: relative; background: var(--surface); padding: 0 .8rem; }
+.social { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; } .social .btn { justify-content: center; }
+.alt { text-align: center; color: var(--muted); } .alt a { color: var(--primary); font-weight: 700; }
+.e { color: #d63031; font-style: normal; font-size: .8rem; margin-top: -.6rem; }
+@media (max-width: 860px) { .auth { grid-template-columns: 1fr; } .art { padding: 2rem; } .art h2 { font-size: 2rem; } .emoji { font-size: 4rem; } }

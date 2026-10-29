@@ -1,0 +1,35 @@
+<section class="container page">
+  <h1 class="section-title">Shopping <span class="gradient-text">Cart</span></h1>
+  <p class="section-sub">Review your items before checkout.</p>
+
+  @if (cart.items().length) {
+    <div class="layout">
+      <div class="card list">
+        @for (i of cart.items(); track i.product.id) {
+          <div class="line">
+            <a [routerLink]="['/products', i.product.id]" class="mini" [style.background]="i.product.color + '44'">{{ i.product.emoji }}</a>
+            <div class="info"><a [routerLink]="['/products', i.product.id]"><b>{{ i.product.name }}</b></a><small>{{ i.product.category }}</small></div>
+            <div class="qty"><button (click)="cart.setQty(i.product.id, i.qty - 1)">−</button><span>{{ i.qty }}</span><button (click)="cart.setQty(i.product.id, i.qty + 1)">+</button></div>
+            <b class="lt">{{ i.product.price * i.qty | currency }}</b>
+            <button class="x" (click)="cart.remove(i.product.id)" aria-label="Remove">🗑️</button>
+          </div>
+        }
+        <div class="foot"><a routerLink="/products" class="btn btn-ghost">← Continue shopping</a><button class="btn btn-ghost" (click)="cart.clear()">Clear cart</button></div>
+      </div>
+
+      <aside class="card sum">
+        <h3>Order summary</h3>
+        <div class="r"><span>Subtotal</span><b>{{ cart.subtotal() | currency }}</b></div>
+        <div class="r"><span>Shipping</span><b>{{ cart.shipping() ? (cart.shipping() | currency) : 'Free' }}</b></div>
+        <div class="r"><span>Tax (8%)</span><b>{{ cart.tax() | currency }}</b></div>
+        @if (applied()) { <div class="r disc"><span>Discount (NOVA10)</span><b>−{{ discount() | currency }}</b></div> }
+        <div class="r total"><span>Total</span><b>{{ total() | currency }}</b></div>
+        <div class="cp"><input class="input" placeholder="Coupon code" [value]="coupon()" (input)="coupon.set($any($event.target).value)" /><button class="btn btn-ghost" (click)="apply()">Apply</button></div>
+        <small class="hint">Try code <b>NOVA10</b></small>
+        <a routerLink="/checkout" class="btn btn-primary btn-block">Proceed to checkout →</a>
+      </aside>
+    </div>
+  } @else {
+    <div class="card empty"><span>🛒</span><h2>Your cart is empty</h2><p>Looks like you have not added anything yet.</p><a routerLink="/products" class="btn btn-primary">Start shopping</a></div>
+  }
+</section>

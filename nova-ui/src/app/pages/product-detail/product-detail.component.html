@@ -1,0 +1,45 @@
+<section class="container page">
+  @if (product(); as p) {
+    <p class="crumbs"><a routerLink="/">Home</a> / <a routerLink="/products">Products</a> / {{ p.name }}</p>
+    <div class="top">
+      <div class="gallery">
+        <div class="big" [style.background]="'linear-gradient(135deg,' + p.color + '33,' + p.color + '99)'"><span>{{ p.emoji }}</span></div>
+        <div class="thumbs">
+          @for (t of [0, 1, 2, 3]; track t) { <div class="t" [style.background]="p.color + (t === 0 ? '88' : '33')">{{ p.emoji }}</div> }
+        </div>
+      </div>
+      <div class="info">
+        <span class="cat">{{ p.category }}</span>
+        <h1>{{ p.name }}</h1>
+        <div class="rate">{{ stars(p.rating) }} <em>{{ p.rating }} · {{ p.reviews }} reviews</em></div>
+        <div class="price"><b>{{ p.price | currency }}</b>@if (p.oldPrice) { <s>{{ p.oldPrice | currency }}</s><span class="off">Save {{ p.oldPrice - p.price | currency:'USD':'symbol':'1.0-0' }}</span> }</div>
+        <p class="desc">{{ p.description }}</p>
+        <ul>@for (f of p.features; track f) { <li>✔ {{ f }}</li> }</ul>
+        <div class="buy">
+          <div class="qty"><button (click)="dec()">−</button><span>{{ qty() }}</span><button (click)="inc()">+</button></div>
+          <button class="btn btn-primary" (click)="add()">🛒 Add to cart</button>
+          <button class="btn btn-ghost" (click)="buyNow()">Buy now</button>
+        </div>
+        <div class="perks"><span>🚚 Free delivery</span><span>↩️ 30-day returns</span><span>🛡️ 2-year warranty</span></div>
+      </div>
+    </div>
+
+    <h2 class="h2">Customer reviews</h2>
+    <div class="revs">
+      @for (r of reviews; track r.n) {
+        <div class="card rv"><div class="rate">{{ stars(r.r) }}</div><p>“{{ r.t }}”</p><b>{{ r.n }}</b></div>
+      }
+    </div>
+
+    @if (related().length) {
+      <h2 class="h2">You may also like</h2>
+      <div class="rel">
+        @for (r of related(); track r.id) {
+          <a class="card rc" [routerLink]="['/products', r.id]"><span class="e" [style.background]="r.color + '44'">{{ r.emoji }}</span><div><b>{{ r.name }}</b><small>{{ r.price | currency }}</small></div></a>
+        }
+      </div>
+    }
+  } @else {
+    <div class="nf card"><h2>😕 Product not found</h2><a routerLink="/products" class="btn btn-primary">Back to products</a></div>
+  }
+</section>

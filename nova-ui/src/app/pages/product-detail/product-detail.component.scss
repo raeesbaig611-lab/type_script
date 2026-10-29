@@ -1,0 +1,23 @@
+.top { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.big { height: 420px; border-radius: var(--radius); display: grid; place-items: center; font-size: 9rem; animation: fadeUp .6s; } .big span { animation: float 5s ease-in-out infinite; }
+.thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; margin-top: .8rem; }
+.t { height: 80px; border-radius: 14px; display: grid; place-items: center; font-size: 2rem; border: 2px solid transparent; }
+.t:first-child { border-color: var(--primary); }
+.cat { color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: .8rem; letter-spacing: .1em; }
+h1 { font-size: 2.4rem; line-height: 1.15; margin: .3rem 0; }
+.rate { color: #fdcb6e; } .rate em { color: var(--muted); font-style: normal; font-size: .9rem; margin-left: .4rem; }
+.price { margin: 1rem 0; display: flex; align-items: baseline; gap: .8rem; } .price b { font-size: 2.2rem; } .price s { color: var(--muted); }
+.off { background: #d6303120; color: #d63031; padding: .15rem .7rem; border-radius: 999px; font-size: .8rem; font-weight: 700; }
+.desc { color: var(--muted); margin-bottom: 1rem; }
+ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-bottom: 1.6rem; }
+.buy { display: flex; gap: .8rem; flex-wrap: wrap; align-items: center; }
+.qty { display: inline-flex; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: 999px; padding: .3rem .5rem; background: var(--surface); }
+.qty button { width: 32px; height: 32px; border-radius: 50%; border: 0; background: var(--bg); color: var(--text); font-size: 1.1rem; } .qty span { min-width: 20px; text-align: center; font-weight: 700; }
+.perks { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 1.6rem; color: var(--muted); font-size: .88rem; }
+.h2 { margin: 4rem 0 1.2rem; font-size: 1.6rem; }
+.revs, .rel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.rv { padding: 1.4rem; } .rv p { margin: .5rem 0 .8rem; font-style: italic; }
+.rc { display: flex; gap: 1rem; align-items: center; padding: 1rem; transition: .25s; } .rc:hover { transform: translateY(-5px); }
+.e { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; font-size: 2rem; } .rc small { display: block; color: var(--muted); }
+.nf { text-align: center; padding: 4rem; display: grid; gap: 1.4rem; justify-items: center; }
+@media (max-width: 860px) { .top, .revs, .rel { grid-template-columns: 1fr; } .big { height: 300px; font-size: 6rem; } }

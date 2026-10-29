@@ -1,0 +1,17 @@
+<section class="hero"><div class="container"><h1>About <span class="gradient-text">Nova</span></h1><p>We build and sell modern gadgets people love to use every day.</p></div></section>
+<section class="container grid3">
+  @for (v of values; track v.t) { <div class="card v"><span>{{ v.i }}</span><h3>{{ v.t }}</h3><p>{{ v.d }}</p></div> }
+</section>
+<section class="container block">
+  <h2 class="section-title">Our <span class="gradient-text">journey</span></h2><p class="section-sub">A few milestones along the way.</p>
+  <div class="tl">
+    @for (t of timeline; track t.y) { <div class="ti"><b class="gradient-text">{{ t.y }}</b><div class="card"><p>{{ t.t }}</p></div></div> }
+  </div>
+</section>
+<section class="container block">
+  <h2 class="section-title">Meet the <span class="gradient-text">team</span></h2><p class="section-sub">The people behind Nova.</p>
+  <div class="grid4">
+    @for (m of team; track m.n) { <div class="card m"><span>{{ m.e }}</span><b>{{ m.n }}</b><small>{{ m.r }}</small></div> }
+  </div>
+</section>
+<section class="container"><div class="banner"><h2>Want to work with us?</h2><p>We are always happy to hear from you.</p><a routerLink="/contact" class="btn">Contact us</a></div></section>

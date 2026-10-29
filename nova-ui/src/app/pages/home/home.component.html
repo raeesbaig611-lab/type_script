@@ -25,6 +25,29 @@
 </section>
 
 <section class="container block">
+  <h2 class="section-title">Shop by <span class="gradient-text">category</span></h2>
+  <p class="section-sub">Find exactly what you are looking for.</p>
+  <div class="cats">
+    @for (c of categories; track c.n) { <a routerLink="/products" class="card cat"><span>{{ c.e }}</span><b>{{ c.n }}</b></a> }
+  </div>
+</section>
+
+<section class="container block">
+  <h2 class="section-title">Featured <span class="gradient-text">products</span></h2>
+  <p class="section-sub">Our customers' favourites this week.</p>
+  <div class="fgrid">
+    @for (p of featured; track p.id) {
+      <div class="card fp">
+        <a [routerLink]="['/products', p.id]" class="fimg" [style.background]="'linear-gradient(135deg,' + p.color + '33,' + p.color + '99)'">{{ p.emoji }}</a>
+        <h4>{{ p.name }}</h4>
+        <div class="fr"><b>{{ p.price | currency }}</b><button class="btn btn-primary" (click)="cart.add(p, 1, true)">Add +</button></div>
+      </div>
+    }
+  </div>
+  <p class="more"><a routerLink="/products" class="btn btn-ghost">View all products →</a></p>
+</section>
+
+<section class="container block">
   <h2 class="section-title">Everything you <span class="gradient-text">need</span></h2>
   <p class="section-sub">Powerful features wrapped in a delightful design.</p>
   <div class="grid">

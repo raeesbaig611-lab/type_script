@@ -1,0 +1,15 @@
+.hero { text-align: center; padding: 5rem 0 3rem; background: radial-gradient(circle at 50% 0, color-mix(in srgb, var(--primary) 20%, transparent), transparent 60%); }
+.hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; } .hero p { color: var(--muted); font-size: 1.15rem; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.v { padding: 2rem; text-align: center; transition: .25s; } .v:hover { transform: translateY(-8px); }
+.v span { font-size: 2.6rem; } .v h3 { margin: .6rem 0 .3rem; } .v p { color: var(--muted); }
+.block { margin-top: 6rem; }
+.tl { max-width: 700px; margin: auto; border-left: 3px solid var(--border); padding-left: 2rem; display: grid; gap: 1.4rem; }
+.ti { position: relative; } .ti::before { content: ''; position: absolute; left: -2.65rem; top: .5rem; width: 16px; height: 16px; border-radius: 50%; background: var(--grad); }
+.ti b { font-size: 1.4rem; } .ti .card { padding: 1rem 1.3rem; margin-top: .3rem; }
+.grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem; }
+.m { padding: 2rem 1rem; text-align: center; display: grid; gap: .3rem; transition: .25s; } .m:hover { transform: translateY(-8px); }
+.m span { font-size: 4rem; } .m small { color: var(--muted); }
+.banner { margin-top: 6rem; background: var(--grad); color: #fff; text-align: center; padding: 4rem 1.5rem; border-radius: 28px; }
+.banner h2 { font-size: 2.2rem; } .banner p { margin: .5rem 0 1.6rem; opacity: .9; } .banner .btn { background: #fff; color: var(--primary); }
+@media (max-width: 860px) { .grid3 { grid-template-columns: 1fr; } .grid4 { grid-template-columns: repeat(2, 1fr); } }

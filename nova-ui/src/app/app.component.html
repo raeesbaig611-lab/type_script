@@ -1,3 +1,4 @@
+<div class="topbar">🚚 Free shipping on orders over $500 &nbsp;|&nbsp; 🎁 Use code <b>NOVA10</b> for 10% off</div>
 <header class="nav">
   <div class="container nav-inner">
     <a routerLink="/" class="logo"><span class="dot"></span>Nova</a>
@@ -5,18 +6,69 @@
       @for (l of links; track l.path) {
         <a [routerLink]="l.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: l.path === '/' }" (click)="menu.set(false)">{{ l.label }}</a>
       }
+      <a routerLink="/login" class="m-only" (click)="menu.set(false)">Login</a>
     </nav>
     <div class="actions">
-      <span class="cart" title="Cart">🛒 <b>{{ cart.count() }}</b></span>
+      <button class="cart" (click)="cart.drawer.set(true)" aria-label="Open cart">🛒 <b>{{ cart.count() }}</b></button>
       <button class="icon" (click)="toggle()" aria-label="Toggle theme">{{ dark() ? '☀️' : '🌙' }}</button>
+      <a routerLink="/login" class="btn btn-ghost sm d-only">Login</a>
+      <a routerLink="/register" class="btn btn-primary sm d-only">Sign up</a>
       <button class="icon burger" (click)="menu.set(!menu())" aria-label="Menu">☰</button>
     </div>
   </div>
 </header>
+
 <main><router-outlet /></main>
+
 <footer>
-  <div class="container foot">
-    <span class="logo"><span class="dot"></span>Nova</span>
-    <p>© 2026 Nova. Built with Angular ❤️</p>
+  <div class="container fgrid">
+    <div>
+      <span class="logo"><span class="dot"></span>Nova</span>
+      <p class="muted">Modern gadgets and smart-home products, designed for everyday life.</p>
+    </div>
+    <div><h5>Shop</h5><a routerLink="/products">All products</a><a routerLink="/cart">Cart</a><a routerLink="/checkout">Checkout</a></div>
+    <div><h5>Company</h5><a routerLink="/about">About us</a><a routerLink="/dashboard">Dashboard</a><a routerLink="/contact">Contact</a></div>
+    <div>
+      <h5>Newsletter</h5>
+      @if (subscribed()) { <p class="alert-ok">✅ Subscribed!</p> } @else {
+        <form class="news" (submit)="$event.preventDefault(); subscribed.set(true)">
+          <input class="input" type="email" placeholder="Your email" required /><button class="btn btn-primary">Join</button>
+        </form>
+      }
+    </div>
   </div>
+  <div class="container copy">© 2026 Nova. Built with Angular ❤️</div>
 </footer>
+
+@if (cart.drawer()) {
+  <div class="overlay" (click)="cart.drawer.set(false)"></div>
+}
+<aside class="drawer" [class.open]="cart.drawer()">
+  <div class="dh"><h3>Your Cart ({{ cart.count() }})</h3><button class="icon" (click)="cart.drawer.set(false)">✕</button></div>
+  <div class="dbody">
+    @for (i of cart.items(); track i.product.id) {
+      <div class="line">
+        <div class="mini" [style.background]="i.product.color + '44'">{{ i.product.emoji }}</div>
+        <div class="info">
+          <b>{{ i.product.name }}</b>
+          <small>{{ i.product.price | currency }}</small>
+          <div class="qty">
+            <button (click)="cart.setQty(i.product.id, i.qty - 1)">−</button><span>{{ i.qty }}</span><button (click)="cart.setQty(i.product.id, i.qty + 1)">+</button>
+          </div>
+        </div>
+        <button class="x" (click)="cart.remove(i.product.id)" aria-label="Remove">🗑️</button>
+      </div>
+    } @empty {
+      <div class="empty">🛒<p>Your cart is empty</p><a routerLink="/products" class="btn btn-primary" (click)="cart.drawer.set(false)">Shop now</a></div>
+    }
+  </div>
+  @if (cart.count()) {
+    <div class="df">
+      <div class="sum"><span>Subtotal</span><b>{{ cart.subtotal() | currency }}</b></div>
+      <a routerLink="/cart" class="btn btn-ghost btn-block" (click)="cart.drawer.set(false)">View cart</a>
+      <a routerLink="/checkout" class="btn btn-primary btn-block" (click)="cart.drawer.set(false)">Checkout →</a>
+    </div>
+  }
+</aside>
+
+@if (cart.toast()) { <div class="toast">✅ {{ cart.toast() }}</div> }

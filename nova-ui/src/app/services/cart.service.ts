@@ -1,11 +1,40 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
+import { Product } from './data';
 
-export interface Product { id: number; name: string; category: string; price: number; rating: number; emoji: string; color: string; }
+export interface CartItem { product: Product; qty: number; }
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private items = signal<Product[]>([]);
-  readonly count = computed(() => this.items().length);
-  readonly total = computed(() => this.items().reduce((s, p) => s + p.price, 0));
-  add(p: Product) { this.items.update(i => [...i, p]); }
+  readonly items = signal<CartItem[]>(this.load());
+  readonly drawer = signal(false);
+  readonly toast = signal('');
+
+  readonly count = computed(() => this.items().reduce((s, i) => s + i.qty, 0));
+  readonly subtotal = computed(() => this.items().reduce((s, i) => s + i.qty * i.product.price, 0));
+  readonly shipping = computed(() => (this.subtotal() === 0 || this.subtotal() >= 500 ? 0 : 15));
+  readonly tax = computed(() => Math.round(this.subtotal() * 0.08 * 100) / 100);
+  readonly total = computed(() => this.subtotal() + this.shipping() + this.tax());
+
+  constructor() {
+    effect(() => { try { localStorage.setItem('cart', JSON.stringify(this.items())); } catch {} });
+  }
+
+  add(p: Product, qty = 1, open = false) {
+    this.items.update(list => {
+      const found = list.find(i => i.product.id === p.id);
+      return found ? list.map(i => (i === found ? { ...i, qty: i.qty + qty } : i)) : [...list, { product: p, qty }];
+    });
+    this.notify(`${p.name} added to cart`);
+    if (open) this.drawer.set(true);
+  }
+  setQty(id: number, qty: number) {
+    this.items.update(list => list.map(i => (i.product.id === id ? { ...i, qty: Math.max(1, qty) } : i)));
+  }
+  remove(id: number) { this.items.update(list => list.filter(i => i.product.id !== id)); }
+  clear() { this.items.set([]); }
+  notify(msg: string) { this.toast.set(msg); setTimeout(() => this.toast.set(''), 1800); }
+
+  private load(): CartItem[] {
+    try { return JSON.parse(localStorage.getItem('cart') || '[]'); } catch { return []; }
+  }
 }

@@ -1,0 +1,24 @@
+<section class="auth">
+  <div class="art"><div class="blob"></div><h2>Join Nova ✨</h2><p>Create a free account and get 10% off your first order.</p><div class="emoji">🎁</div></div>
+  <div class="panel">
+    <form class="card box" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <h1>Create account</h1><p class="sub">It only takes a minute.</p>
+      @if (ok()) { <div class="alert-ok">🎉 Account created successfully (demo).</div> }
+      <label class="field">Full name<input formControlName="name" placeholder="John Doe" [class.err]="bad('name')" />@if (bad('name')) { <em>Name must be at least 3 characters.</em> }</label>
+      <div class="row2">
+        <label class="field">Email<input type="email" formControlName="email" placeholder="you@example.com" [class.err]="bad('email')" />@if (bad('email')) { <em>Enter a valid email.</em> }</label>
+        <label class="field">Phone<input formControlName="phone" placeholder="+92 300 1234567" [class.err]="bad('phone')" />@if (bad('phone')) { <em>Enter a valid phone.</em> }</label>
+      </div>
+      <label class="field">Password
+        <span class="pw"><input [type]="show() ? 'text' : 'password'" formControlName="password" placeholder="Min 6 characters" [class.err]="bad('password')" /><button type="button" (click)="show.set(!show())">{{ show() ? '🙈' : '👁️' }}</button></span>
+        <span class="meter"><i [class.on]="strength >= 1"></i><i [class.on]="strength >= 2"></i><i [class.on]="strength >= 3"></i><i [class.on]="strength >= 4"></i></span>
+        @if (bad('password')) { <em>Password must be at least 6 characters.</em> }
+      </label>
+      <label class="field">Confirm password<input type="password" formControlName="confirm" placeholder="Repeat password" [class.err]="bad('confirm') || mismatch" />@if (mismatch) { <em>Passwords do not match.</em> }</label>
+      <label class="chk"><input type="checkbox" formControlName="terms" /> I agree to the Terms &amp; Privacy Policy</label>
+      @if (form.controls.terms.touched && form.controls.terms.invalid) { <em class="e">You must accept the terms.</em> }
+      <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+      <p class="alt">Already have an account? <a routerLink="/login">Login</a></p>
+    </form>
+  </div>
+</section>

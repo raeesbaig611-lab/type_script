@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../services/cart.service';
+import { PRODUCTS } from '../../services/data';
 
-@Component({ selector: 'app-home', imports: [RouterLink], templateUrl: './home.component.html', styleUrl: './home.component.scss' })
+@Component({ selector: 'app-home', imports: [RouterLink, CurrencyPipe], templateUrl: './home.component.html', styleUrl: './home.component.scss' })
 export class HomeComponent {
+  featured = PRODUCTS.slice(0, 4);
+  categories = [{ n: 'Audio', e: '🎧' }, { n: 'Wearables', e: '⌚' }, { n: 'Computers', e: '💻' }, { n: 'Photo', e: '📷' }, { n: 'Home', e: '🏠' }];
+  constructor(public cart: CartService) {}
   features = [
     { icon: '⚡', title: 'Lightning Fast', text: 'Optimised builds and lazy-loaded routes keep every page instant.' },
     { icon: '🎨', title: 'Beautiful Design', text: 'A clean, modern interface with smooth animations and dark mode.' },
