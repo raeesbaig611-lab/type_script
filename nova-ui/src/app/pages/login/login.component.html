@@ -4,6 +4,7 @@
     <form class="card box" [formGroup]="form" (ngSubmit)="submit()" novalidate>
       <h1>Login</h1><p class="sub">Enter your details to continue.</p>
       @if (ok()) { <div class="alert-ok">🎉 Logged in successfully (demo).</div> }
+      <div class="hint">🔑 Admin demo: <b>admin&#64;nova.com</b> / <b>admin123</b> <button type="button" (click)="fillAdmin()">Autofill</button></div>
       <label class="field">Email<input type="email" formControlName="email" placeholder="you@example.com" [class.err]="bad('email')" />@if (bad('email')) { <em>Enter a valid email.</em> }</label>
       <label class="field">Password
         <span class="pw"><input [type]="show() ? 'text' : 'password'" formControlName="password" placeholder="••••••••" [class.err]="bad('password')" /><button type="button" (click)="show.set(!show())">{{ show() ? '🙈' : '👁️' }}</button></span>

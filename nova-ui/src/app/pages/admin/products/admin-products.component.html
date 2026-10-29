@@ -1,0 +1,42 @@
+<div class="head"><div><h1>Products</h1><p>{{ products().length }} products in your store</p></div><button class="btn btn-primary" (click)="openAdd()">＋ Add product</button></div>
+<div class="card box">
+  <input class="input q" placeholder="Search products..." [value]="query()" (input)="query.set($any($event.target).value)" />
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Rating</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        @for (p of list(); track p.id) {
+          <tr>
+            <td><div class="pr"><span class="e" [style.background]="p.color + '44'">{{ p.emoji }}</span><b>{{ p.name }}</b></div></td>
+            <td>{{ p.category }}</td><td>{{ p.price | currency }}</td><td>⭐ {{ p.rating }}</td>
+            <td><span class="badge in">In stock</span></td>
+            <td class="act"><button (click)="openEdit(p)" title="Edit">✏️</button><button (click)="confirm.set(p)" title="Delete">🗑️</button></td>
+          </tr>
+        } @empty { <tr><td colspan="6" class="none">No products found.</td></tr> }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@if (modal()) {
+  <div class="ov" (click)="modal.set(false)"></div>
+  <form class="card modal" [formGroup]="form" (ngSubmit)="save()" novalidate>
+    <h3>{{ editing() ? 'Edit product' : 'Add new product' }}</h3>
+    <label class="field">Name<input formControlName="name" placeholder="Product name" [class.err]="bad('name')" />@if (bad('name')) { <em>At least 3 characters.</em> }</label>
+    <div class="row2">
+      <label class="field">Category<select formControlName="category">@for (c of categories; track c) { <option>{{ c }}</option> }</select></label>
+      <label class="field">Icon (emoji)<input formControlName="emoji" /></label>
+    </div>
+    <div class="row2">
+      <label class="field">Price ($)<input type="number" formControlName="price" [class.err]="bad('price')" />@if (bad('price')) { <em>Enter a valid price.</em> }</label>
+      <label class="field">Stock<input type="number" formControlName="stock" /></label>
+    </div>
+    <label class="field">Description<textarea rows="3" formControlName="description" [class.err]="bad('description')"></textarea>@if (bad('description')) { <em>At least 10 characters.</em> }</label>
+    <div class="mact"><button type="button" class="btn btn-ghost" (click)="modal.set(false)">Cancel</button><button class="btn btn-primary" type="submit">{{ editing() ? 'Save changes' : 'Add product' }}</button></div>
+  </form>
+}
+@if (confirm(); as c) {
+  <div class="ov" (click)="confirm.set(null)"></div>
+  <div class="card modal small"><h3>Delete product?</h3><p>Are you sure you want to delete <b>{{ c.name }}</b>?</p><div class="mact"><button class="btn btn-ghost" (click)="confirm.set(null)">Cancel</button><button class="btn danger" (click)="remove()">Delete</button></div></div>
+}
+@if (toast()) { <div class="toast">✅ {{ toast() }}</div> }

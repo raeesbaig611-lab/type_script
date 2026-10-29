@@ -1,3 +1,4 @@
+@if (admin()) { <router-outlet /> } @else {
 <div class="topbar">🚚 Free shipping on orders over $500 &nbsp;|&nbsp; 🎁 Use code <b>NOVA10</b> for 10% off</div>
 <header class="nav">
   <div class="container nav-inner">
@@ -71,4 +72,5 @@
   }
 </aside>
 
+}
 @if (cart.toast()) { <div class="toast">✅ {{ cart.toast() }}</div> }

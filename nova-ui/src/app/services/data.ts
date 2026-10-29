@@ -17,3 +17,26 @@ export const PRODUCTS: Product[] = [
   { id: 11, name: 'Snap Mouse', category: 'Computers', price: 39, rating: 4.4, reviews: 376, emoji: '🖱️', color: '#74b9ff', description: 'Ergonomic wireless mouse with silent clicks and precise tracking.', features: ['Silent click', '2.4G + Bluetooth', '4000 DPI', '6 month battery'] },
   { id: 12, name: 'Beam Projector', category: 'Home', price: 349, rating: 4.3, reviews: 64, emoji: '📽️', color: '#fab1a0', badge: 'New', description: 'Mini full-HD projector for movie nights, gaming and presentations.', features: ['Full HD', 'Built-in speaker', 'Wi-Fi casting', '120" screen'] },
 ];
+
+export interface Order { id: string; customer: string; date: string; total: number; status: 'Pending' | 'Shipped' | 'Delivered' | 'Cancelled'; items: number; }
+export interface Customer { name: string; email: string; city: string; orders: number; spent: number; joined: string; }
+
+export const ORDERS: Order[] = [
+  { id: '#1042', customer: 'Sara Khan', date: '2026-10-28', total: 129, status: 'Delivered', items: 1 },
+  { id: '#1041', customer: 'Ali Raza', date: '2026-10-27', total: 549, status: 'Shipped', items: 1 },
+  { id: '#1040', customer: 'Hina Malik', date: '2026-10-27', total: 89, status: 'Pending', items: 1 },
+  { id: '#1039', customer: 'Usman Tariq', date: '2026-10-26', total: 1299, status: 'Delivered', items: 1 },
+  { id: '#1038', customer: 'Ayesha Noor', date: '2026-10-25', total: 59, status: 'Cancelled', items: 1 },
+  { id: '#1037', customer: 'Bilal Ahmed', date: '2026-10-24', total: 258, status: 'Shipped', items: 2 },
+  { id: '#1036', customer: 'Zara Sheikh', date: '2026-10-23', total: 699, status: 'Delivered', items: 1 },
+  { id: '#1035', customer: 'Hamza Ali', date: '2026-10-22', total: 144, status: 'Pending', items: 3 },
+];
+
+export const CUSTOMERS: Customer[] = [
+  { name: 'Sara Khan', email: 'sara@example.com', city: 'Lahore', orders: 6, spent: 842, joined: '2025-02-11' },
+  { name: 'Ali Raza', email: 'ali@example.com', city: 'Karachi', orders: 4, spent: 1190, joined: '2025-04-02' },
+  { name: 'Hina Malik', email: 'hina@example.com', city: 'Islamabad', orders: 3, spent: 267, joined: '2025-06-19' },
+  { name: 'Usman Tariq', email: 'usman@example.com', city: 'Faisalabad', orders: 8, spent: 2310, joined: '2024-11-30' },
+  { name: 'Ayesha Noor', email: 'ayesha@example.com', city: 'Multan', orders: 2, spent: 118, joined: '2026-01-08' },
+  { name: 'Bilal Ahmed', email: 'bilal@example.com', city: 'Lahore', orders: 5, spent: 731, joined: '2025-08-23' },
+];

@@ -17,3 +17,4 @@
 .alt { text-align: center; color: var(--muted); } .alt a { color: var(--primary); font-weight: 700; }
 .e { color: #d63031; font-style: normal; font-size: .8rem; margin-top: -.6rem; }
 @media (max-width: 860px) { .auth { grid-template-columns: 1fr; } .art { padding: 2rem; } .art h2 { font-size: 2rem; } .emoji { font-size: 4rem; } }
+.hint { background: color-mix(in srgb, var(--primary) 10%, transparent); border: 1px dashed var(--primary); border-radius: 12px; padding: .7rem 1rem; font-size: .85rem; } .hint button { margin-left: .5rem; background: var(--grad); color: #fff; border: 0; border-radius: 999px; padding: .2rem .8rem; font-size: .78rem; }

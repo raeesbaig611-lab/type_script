@@ -1,0 +1,16 @@
+<div class="head"><div><h1>Settings</h1><p>Update your store preferences</p></div></div>
+<form class="card box set" (ngSubmit)="save()">
+  @if (saved()) { <div class="alert-ok">✅ Settings saved successfully.</div> }
+  <div class="row2">
+    <label class="field">Store name<input name="store" [(ngModel)]="s.store" /></label>
+    <label class="field">Currency<select name="cur" [(ngModel)]="s.currency"><option>USD</option><option>PKR</option><option>EUR</option></select></label>
+  </div>
+  <div class="row2">
+    <label class="field">Support email<input name="email" type="email" [(ngModel)]="s.email" /></label>
+    <label class="field">Phone<input name="phone" [(ngModel)]="s.phone" /></label>
+  </div>
+  <div class="tg"><label><input type="checkbox" name="n1" [(ngModel)]="s.emailNotif" /> Email notifications</label>
+  <label><input type="checkbox" name="n2" [(ngModel)]="s.orderAlerts" /> New order alerts</label>
+  <label><input type="checkbox" name="n3" [(ngModel)]="s.maintenance" /> Maintenance mode</label></div>
+  <div class="mact"><button class="btn btn-primary" type="submit">Save settings</button></div>
+</form>

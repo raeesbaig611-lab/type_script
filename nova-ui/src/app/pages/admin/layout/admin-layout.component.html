@@ -1,0 +1,22 @@
+<div class="shell">
+  <aside class="side" [class.open]="open()">
+    <a routerLink="/admin" class="logo"><span class="dot"></span>Nova <small>Admin</small></a>
+    <nav>
+      @for (n of nav; track n.p) {
+        <a [routerLink]="n.p" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: n.exact }" (click)="open.set(false)"><span>{{ n.i }}</span>{{ n.l }}</a>
+      }
+    </nav>
+    <div class="bottom">
+      <a routerLink="/" class="btn btn-ghost btn-block">🌐 View website</a>
+      <button class="btn btn-primary btn-block" (click)="logout()">Logout</button>
+    </div>
+  </aside>
+  <div class="main">
+    <header class="top">
+      <button class="burger" (click)="open.set(!open())">☰</button>
+      <input class="input search" placeholder="🔍 Search anything..." />
+      <div class="me"><span class="bell">🔔<i></i></span><span class="av">A</span><div><b>Admin</b><small>admin&#64;nova.com</small></div></div>
+    </header>
+    <div class="content"><router-outlet /></div>
+  </div>
+</div>

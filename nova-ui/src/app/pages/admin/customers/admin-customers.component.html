@@ -1,0 +1,9 @@
+<div class="head"><div><h1>Customers</h1><p>{{ customers.length }} registered customers</p></div></div>
+<div class="card box"><div class="scroll"><table>
+  <thead><tr><th>Customer</th><th>City</th><th>Orders</th><th>Total spent</th><th>Joined</th></tr></thead>
+  <tbody>
+    @for (c of customers; track c.email) {
+      <tr><td><div class="pr"><span class="e av">{{ c.name[0] }}</span><div><b>{{ c.name }}</b><br /><small>{{ c.email }}</small></div></div></td>
+        <td>{{ c.city }}</td><td>{{ c.orders }}</td><td>{{ c.spent | currency }}</td><td>{{ c.joined }}</td></tr>
+    }
+  </tbody></table></div></div>

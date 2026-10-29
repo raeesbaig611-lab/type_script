@@ -1,10 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({ selector: 'app-login', imports: [ReactiveFormsModule, RouterLink], templateUrl: './login.component.html', styleUrl: '../register/register.component.scss' })
 export class LoginComponent {
   private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router);
   show = signal(false);
   ok = signal(false);
   form = this.fb.nonNullable.group({
@@ -13,5 +16,11 @@ export class LoginComponent {
     remember: [true],
   });
   bad(c: 'email' | 'password') { const x = this.form.controls[c]; return x.invalid && (x.touched || x.dirty); }
-  submit() { if (this.form.invalid) { this.form.markAllAsTouched(); return; } this.ok.set(true); }
+  submit() {
+    if (this.form.invalid) { this.form.markAllAsTouched(); return; }
+    const { email, password } = this.form.getRawValue();
+    if (this.auth.login(email, password)) this.router.navigate(['/admin']);
+    else this.ok.set(true);
+  }
+  fillAdmin() { this.form.patchValue({ email: 'admin@nova.com', password: 'admin123' }); }
 }

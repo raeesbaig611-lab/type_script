@@ -1,0 +1,16 @@
+<div class="head"><div><h1>Orders</h1><p>Manage and update customer orders</p></div></div>
+<div class="card box">
+  <div class="tabs">@for (s of statuses; track s) { <button [class.on]="filter() === s" (click)="filter.set(s)">{{ s }} <i>{{ count(s) }}</i></button> }</div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Order</th><th>Customer</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th></tr></thead>
+      <tbody>
+        @for (o of list(); track o.id) {
+          <tr><td><b>{{ o.id }}</b></td><td>{{ o.customer }}</td><td>{{ o.date }}</td><td>{{ o.items }}</td><td>{{ o.total | currency }}</td>
+            <td><select class="input st" [class]="o.status.toLowerCase()" [value]="o.status" (change)="setStatus(o.id, $any($event.target).value)">
+              <option>Pending</option><option>Shipped</option><option>Delivered</option><option>Cancelled</option></select></td></tr>
+        } @empty { <tr><td colspan="6" class="none">No orders in this status.</td></tr> }
+      </tbody>
+    </table>
+  </div>
+</div>

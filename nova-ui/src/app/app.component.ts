@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CartService } from './services/cart.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class AppComponent {
   dark = signal(false);
   menu = signal(false);
   subscribed = signal(false);
+  admin = signal(false);
   links = [
     { path: '/', label: 'Home' },
     { path: '/products', label: 'Products' },
@@ -20,7 +21,8 @@ export class AppComponent {
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
   ];
-  constructor(public cart: CartService) {
+  constructor(public cart: CartService, router: Router) {
+    router.events.subscribe(e => { if (e instanceof NavigationEnd) this.admin.set(e.urlAfterRedirects.startsWith('/admin')); });
     let saved: string | null = null;
     try { saved = localStorage.getItem('theme'); } catch {}
     this.apply(saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
