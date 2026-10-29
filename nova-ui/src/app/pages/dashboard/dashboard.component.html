@@ -1,0 +1,46 @@
+<section class="container page">
+  <h1 class="section-title">Analytics <span class="gradient-text">Dashboard</span></h1>
+  <p class="section-sub">A quick overview of how things are going.</p>
+
+  <div class="cards">
+    @for (c of cards; track c.label) {
+      <div class="card kpi">
+        <span class="ic">{{ c.icon }}</span>
+        <div><small>{{ c.label }}</small><h3>{{ c.value }}</h3></div>
+        <em [class.up]="c.up" [class.down]="!c.up">{{ c.delta }}</em>
+      </div>
+    }
+  </div>
+
+  <div class="two">
+    <div class="card panel">
+      <h4>Monthly sales</h4>
+      <div class="bars">
+        @for (s of sales; track $index) {
+          <div class="col"><div class="bar" [style.height.%]="s" [style.animation-delay.ms]="$index * 60"><span>{{ s }}k</span></div><small>{{ months[$index] }}</small></div>
+        }
+      </div>
+    </div>
+    <div class="card panel">
+      <h4>Sales by category</h4>
+      <div class="donut" [style.background]="donut()"><div class="hole">100%</div></div>
+      <ul class="legend">
+        @for (s of split; track s.l) { <li><i [style.background]="s.c"></i>{{ s.l }}<b>{{ s.v }}%</b></li> }
+      </ul>
+    </div>
+  </div>
+
+  <div class="card panel">
+    <h4>Recent orders</h4>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th></tr></thead>
+        <tbody>
+          @for (o of orders; track o.id) {
+            <tr><td>{{ o.id }}</td><td>{{ o.customer }}</td><td>{{ o.total | currency }}</td><td><span class="badge" [class]="o.status.toLowerCase()">{{ o.status }}</span></td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

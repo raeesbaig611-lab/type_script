@@ -1,0 +1,30 @@
+<section class="container page">
+  <h1 class="section-title">Get in <span class="gradient-text">touch</span></h1>
+  <p class="section-sub">Have a question? We would love to hear from you.</p>
+  <div class="wrap">
+    <div class="info">
+      @for (i of [['📍','Address','Lahore, Pakistan'],['📧','Email','hello@nova.dev'],['📞','Phone','+92 300 1234567']]; track i[1]) {
+        <div class="card box"><span>{{ i[0] }}</span><div><small>{{ i[1] }}</small><b>{{ i[2] }}</b></div></div>
+      }
+    </div>
+    <form class="card form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      @if (sent()) { <div class="ok">🎉 Thanks! Your message has been sent.</div> }
+      <label>Name
+        <input formControlName="name" placeholder="Your name" [class.err]="invalid('name')" />
+        @if (invalid('name')) { <em>Name must be at least 3 characters.</em> }
+      </label>
+      <label>Email
+        <input type="email" formControlName="email" placeholder="you@example.com" [class.err]="invalid('email')" />
+        @if (invalid('email')) { <em>Enter a valid email address.</em> }
+      </label>
+      <label>Subject
+        <select formControlName="subject"><option>General</option><option>Support</option><option>Feedback</option></select>
+      </label>
+      <label>Message
+        <textarea rows="5" formControlName="message" placeholder="How can we help?" [class.err]="invalid('message')"></textarea>
+        @if (invalid('message')) { <em>Message must be at least 10 characters.</em> }
+      </label>
+      <button class="btn btn-primary" type="submit">Send message ✈️</button>
+    </form>
+  </div>
+</section>

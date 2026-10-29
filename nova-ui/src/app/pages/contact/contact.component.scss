@@ -1,0 +1,14 @@
+.page { padding-top: 4rem; }
+.wrap { display: grid; grid-template-columns: 1fr 1.5fr; gap: 1.5rem; }
+.info { display: grid; gap: 1rem; align-content: start; }
+.box { display: flex; gap: 1rem; align-items: center; padding: 1.3rem; }
+.box span { width: 48px; height: 48px; border-radius: 14px; background: var(--grad); display: grid; place-items: center; font-size: 1.4rem; }
+.box small { display: block; color: var(--muted); }
+.form { padding: 2rem; display: grid; gap: 1.1rem; }
+label { display: grid; gap: .4rem; font-weight: 600; font-size: .9rem; }
+input, select, textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: .8rem 1rem; outline: none; resize: vertical; transition: .2s; }
+input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(108, 92, 231, .15); }
+.err { border-color: #d63031 !important; } em { color: #d63031; font-style: normal; font-weight: 400; font-size: .8rem; }
+.ok { background: #00b89420; color: #00b894; padding: .9rem 1rem; border-radius: 12px; font-weight: 600; animation: fadeUp .4s; }
+.form .btn { justify-content: center; border: 0; }
+@media (max-width: 800px) { .wrap { grid-template-columns: 1fr; } }

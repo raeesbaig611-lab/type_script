@@ -1,0 +1,37 @@
+<section class="container page">
+  <h1 class="section-title">Our <span class="gradient-text">Products</span></h1>
+  <p class="section-sub">Search, filter and sort to find your perfect match.</p>
+
+  <div class="toolbar card">
+    <input type="search" placeholder="🔍 Search products..." [value]="query()" (input)="query.set($any($event.target).value)" />
+    <select [value]="sort()" (change)="sort.set($any($event.target).value)">
+      <option value="featured">Featured</option><option value="low">Price: Low → High</option>
+      <option value="high">Price: High → Low</option><option value="rating">Top rated</option>
+    </select>
+  </div>
+
+  <div class="chips">
+    @for (c of categories; track c) {
+      <button [class.on]="category() === c" (click)="category.set(c)">{{ c }}</button>
+    }
+  </div>
+
+  @if (list().length) {
+    <div class="grid">
+      @for (p of list(); track p.id) {
+        <article class="card item">
+          <div class="thumb" [style.background]="'linear-gradient(135deg,' + p.color + '33,' + p.color + '99)'"><span>{{ p.emoji }}</span></div>
+          <div class="body">
+            <small>{{ p.category }}</small>
+            <h3>{{ p.name }}</h3>
+            <div class="rate">{{ stars(p.rating) }} <em>{{ p.rating }}</em></div>
+            <div class="row"><b>{{ p.price | currency }}</b><button class="btn btn-primary" (click)="add(p)">Add +</button></div>
+          </div>
+        </article>
+      }
+    </div>
+  } @else {
+    <div class="empty">😕 No products match your search.</div>
+  }
+</section>
+@if (toast()) { <div class="toast">✅ {{ toast() }}</div> }

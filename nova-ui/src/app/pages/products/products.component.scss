@@ -1,0 +1,19 @@
+.page { padding-top: 4rem; }
+.toolbar { display: flex; gap: 1rem; padding: 1rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+input, select, textarea { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: .8rem 1rem; outline: none; transition: border .2s, box-shadow .2s; }
+input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(108, 92, 231, .15); }
+.toolbar input { flex: 1; min-width: 200px; }
+.chips { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 2rem; }
+.chips button { padding: .5rem 1.2rem; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: .2s; }
+.chips button.on { background: var(--grad); color: #fff; border-color: transparent; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+.item { overflow: hidden; transition: transform .25s, box-shadow .25s; animation: fadeUp .5s ease both; }
+.item:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(108, 92, 231, .22); }
+.thumb { height: 170px; display: grid; place-items: center; font-size: 4.5rem; }
+.thumb span { transition: transform .3s; } .item:hover .thumb span { transform: scale(1.2) rotate(-6deg); }
+.body { padding: 1.2rem 1.4rem 1.4rem; } .body small { color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-size: .7rem; }
+.body h3 { margin: .2rem 0; } .rate { color: #fdcb6e; margin-bottom: 1rem; } .rate em { color: var(--muted); font-style: normal; font-size: .85rem; }
+.row { display: flex; justify-content: space-between; align-items: center; } .row b { font-size: 1.3rem; }
+.row .btn { padding: .5rem 1.1rem; border: 0; }
+.empty { text-align: center; padding: 4rem; color: var(--muted); font-size: 1.2rem; }
+.toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: .8rem 1.6rem; border-radius: 999px; box-shadow: var(--shadow); animation: fadeUp .3s ease; z-index: 100; }

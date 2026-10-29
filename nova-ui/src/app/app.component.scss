@@ -1,0 +1,19 @@
+.nav { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(16px); background: color-mix(in srgb, var(--bg) 75%, transparent); border-bottom: 1px solid var(--border); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.logo { font-weight: 800; font-size: 1.4rem; display: flex; align-items: center; gap: .5rem; }
+.dot { width: 14px; height: 14px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 14px var(--primary); }
+nav { display: flex; gap: .4rem; }
+nav a { padding: .5rem 1.1rem; border-radius: 999px; color: var(--muted); font-weight: 500; transition: .2s; }
+nav a:hover { color: var(--text); }
+nav a.active { background: var(--grad); color: #fff; }
+.actions { display: flex; align-items: center; gap: .7rem; }
+.cart { background: var(--surface); border: 1px solid var(--border); padding: .35rem .9rem; border-radius: 999px; }
+.icon { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-size: 1.1rem; }
+.burger { display: none; }
+footer { margin-top: 5rem; border-top: 1px solid var(--border); padding: 2rem 0; color: var(--muted); }
+.foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+@media (max-width: 760px) {
+  .burger { display: block; }
+  nav { display: none; position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: var(--surface); padding: 1rem; border-bottom: 1px solid var(--border); }
+  nav.open { display: flex; }
+}

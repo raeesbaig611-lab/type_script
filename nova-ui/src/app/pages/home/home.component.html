@@ -1,0 +1,56 @@
+<section class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="container hero-grid">
+    <div class="fade-up">
+      <span class="pill">✨ Welcome to the future of web apps</span>
+      <h1>Build <span class="gradient-text">stunning</span> experiences with Nova</h1>
+      <p>A modern, fast and beautiful platform to showcase products, track performance and delight your users.</p>
+      <div class="cta">
+        <a routerLink="/products" class="btn btn-primary">Explore Products →</a>
+        <a routerLink="/dashboard" class="btn btn-ghost">View Dashboard</a>
+      </div>
+    </div>
+    <div class="visual fade-up">
+      <div class="glass g1 card"><b>+24%</b><small>Growth this month</small></div>
+      <div class="glass g2 card"><b>3,482</b><small>Active users</small></div>
+      <div class="orb">🚀</div>
+    </div>
+  </div>
+</section>
+
+<section class="container stats">
+  @for (s of stats; track s.l) {
+    <div class="card stat"><h3 class="gradient-text">{{ s.v }}</h3><p>{{ s.l }}</p></div>
+  }
+</section>
+
+<section class="container block">
+  <h2 class="section-title">Everything you <span class="gradient-text">need</span></h2>
+  <p class="section-sub">Powerful features wrapped in a delightful design.</p>
+  <div class="grid">
+    @for (f of features; track f.title) {
+      <div class="card feature"><span class="ic">{{ f.icon }}</span><h4>{{ f.title }}</h4><p>{{ f.text }}</p></div>
+    }
+  </div>
+</section>
+
+<section class="container block">
+  <h2 class="section-title">Loved by <span class="gradient-text">people</span></h2>
+  <p class="section-sub">Here is what our users say.</p>
+  <div class="grid">
+    @for (r of reviews; track r.n) {
+      <div class="card review">
+        <p>“{{ r.t }}”</p>
+        <div class="who"><span class="av">{{ r.n[0] }}</span><div><b>{{ r.n }}</b><small>{{ r.r }}</small></div></div>
+      </div>
+    }
+  </div>
+</section>
+
+<section class="container">
+  <div class="banner">
+    <h2>Ready to get started?</h2>
+    <p>Join thousands of users already enjoying Nova.</p>
+    <a routerLink="/contact" class="btn">Contact us</a>
+  </div>
+</section>

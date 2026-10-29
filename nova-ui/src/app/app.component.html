@@ -1,0 +1,22 @@
+<header class="nav">
+  <div class="container nav-inner">
+    <a routerLink="/" class="logo"><span class="dot"></span>Nova</a>
+    <nav [class.open]="menu()">
+      @for (l of links; track l.path) {
+        <a [routerLink]="l.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: l.path === '/' }" (click)="menu.set(false)">{{ l.label }}</a>
+      }
+    </nav>
+    <div class="actions">
+      <span class="cart" title="Cart">🛒 <b>{{ cart.count() }}</b></span>
+      <button class="icon" (click)="toggle()" aria-label="Toggle theme">{{ dark() ? '☀️' : '🌙' }}</button>
+      <button class="icon burger" (click)="menu.set(!menu())" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main><router-outlet /></main>
+<footer>
+  <div class="container foot">
+    <span class="logo"><span class="dot"></span>Nova</span>
+    <p>© 2026 Nova. Built with Angular ❤️</p>
+  </div>
+</footer>
