@@ -7,13 +7,19 @@
       @for (l of links; track l.path) {
         <a [routerLink]="l.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: l.path === '/' }" (click)="menu.set(false)">{{ l.label }}</a>
       }
-      <a routerLink="/login" class="m-only" (click)="menu.set(false)">Login</a>
+      @if (auth.user()) { <a href="#" class="m-only" (click)="$event.preventDefault(); logout()">Logout</a> } @else { <a routerLink="/login" class="m-only" (click)="menu.set(false)">Login</a> }
     </nav>
     <div class="actions">
       <button class="cart" (click)="cart.drawer.set(true)" aria-label="Open cart">🛒 <b>{{ cart.count() }}</b></button>
       <button class="icon" (click)="toggle()" aria-label="Toggle theme">{{ dark() ? '☀️' : '🌙' }}</button>
-      <a routerLink="/login" class="btn btn-ghost sm d-only">Login</a>
-      <a routerLink="/register" class="btn btn-primary sm d-only">Sign up</a>
+      @if (auth.user(); as u) {
+        <span class="user d-only"><span class="uav">{{ u.name[0] }}</span><span>Hi, {{ u.name.split(' ')[0] }}</span></span>
+        @if (auth.isAdmin()) { <a routerLink="/admin" class="btn btn-ghost sm d-only">Admin</a> }
+        <button class="btn btn-primary sm d-only" (click)="logout()">Logout</button>
+      } @else {
+        <a routerLink="/login" class="btn btn-ghost sm d-only">Login</a>
+        <a routerLink="/register" class="btn btn-primary sm d-only">Sign up</a>
+      }
       <button class="icon burger" (click)="menu.set(!menu())" aria-label="Menu">☰</button>
     </div>
   </div>

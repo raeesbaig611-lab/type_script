@@ -19,8 +19,9 @@ export class LoginComponent {
   submit() {
     if (this.form.invalid) { this.form.markAllAsTouched(); return; }
     const { email, password } = this.form.getRawValue();
-    if (this.auth.login(email, password)) this.router.navigate(['/admin']);
-    else this.ok.set(true);
+    const role = this.auth.login(email, password);
+    this.ok.set(true);
+    this.router.navigate([role === 'admin' ? '/admin' : '/']);
   }
   fillAdmin() { this.form.patchValue({ email: 'admin@nova.com', password: 'admin123' }); }
 }

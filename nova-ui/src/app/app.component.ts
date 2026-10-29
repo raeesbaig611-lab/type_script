@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CartService } from './services/cart.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,13 @@ export class AppComponent {
     { path: '/about', label: 'About' },
     { path: '/contact', label: 'Contact' },
   ];
-  constructor(public cart: CartService, router: Router) {
+  constructor(public cart: CartService, public auth: AuthService, private router: Router) {
     router.events.subscribe(e => { if (e instanceof NavigationEnd) this.admin.set(e.urlAfterRedirects.startsWith('/admin')); });
     let saved: string | null = null;
     try { saved = localStorage.getItem('theme'); } catch {}
     this.apply(saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches);
   }
+  logout() { this.auth.logout(); this.menu.set(false); this.cart.notify('Logged out'); this.router.navigate(['/']); }
   toggle() { this.apply(!this.dark()); }
   private apply(d: boolean) {
     this.dark.set(d);

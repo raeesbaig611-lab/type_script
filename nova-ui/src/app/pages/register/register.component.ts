@@ -1,10 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({ selector: 'app-register', imports: [ReactiveFormsModule, RouterLink], templateUrl: './register.component.html', styleUrl: './register.component.scss' })
 export class RegisterComponent {
   private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router);
   show = signal(false);
   ok = signal(false);
   form = this.fb.nonNullable.group({
@@ -21,5 +24,12 @@ export class RegisterComponent {
     const p = this.form.controls.password.value;
     return [p.length >= 6, /[A-Z]/.test(p), /[0-9]/.test(p), /[^A-Za-z0-9]/.test(p)].filter(Boolean).length;
   }
-  submit() { this.form.markAllAsTouched(); if (this.form.invalid) return; this.ok.set(true); }
+  submit() {
+    this.form.markAllAsTouched();
+    if (this.form.invalid) return;
+    const v = this.form.getRawValue();
+    this.auth.login(v.email, v.password, v.name);
+    this.ok.set(true);
+    this.router.navigate(['/']);
+  }
 }
